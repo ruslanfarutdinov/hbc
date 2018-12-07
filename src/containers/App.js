@@ -5,20 +5,19 @@ import Toolbar from '../components/Toolbar';
 import Employees from '../components/Employees';
 
 const MainContainer = styled.div`
-  color: red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 10px;
 `;
 
 class App extends Component {
   render() {
+    let isMobile = window.innerWidth < 440 || window.innerHeight < 420;
+    
     return (
       <MainContainer>
-        <Header/>
-        <Toolbar/>
-        <Employees/>
+        <Header isMobile={isMobile}/>
+        <Toolbar isMobile={isMobile}/>
+        <Employees isMobile={isMobile}/>
       </MainContainer>
     );
   }
