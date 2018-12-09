@@ -11,11 +11,14 @@ const Button = styled.button`
   height: 20px;
   border: none;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
-const button = () => (
+const msg = 'GENERATE NEW PAIRS';
+
+const button = ({handleGenerateNewPair}) => (
   <Div>
-    <Button>GENERATE NEW PAIRS</Button>
+    <Button onClick={handleGenerateNewPair}>{msg}</Button>
   </Div>
 );
 

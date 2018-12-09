@@ -1,44 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hello HBC team!
 
-## Available Scripts
+Thank you for giving me the opportunity to showcase my skills via this coding challenge.
 
-In the project directory, you can run:
+I created the project with [Create React App](https://github.com/facebook/create-react-app) for quick setup. 
+In the past I developed projects from scratch where I setup React with Webpack and Babel. 
 
+To start a development server and load the page run:
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To see how the page looks on mobile, reload while simulating the mobile screen size (Chrome Dev Tools - Toggle device Toolbar).
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+A little analysis on the shuffling algorithm. 
+I came up with 2 implementations of the shuffling algorithm:
+1. Using Array.prototype.splice(), where I generate a random index and then splice the array containing all the elements.
+Repeat this process n times (n being the length of the employees array). 
+Here is code for that algorithm:
+```javascript
+function createRandomPairs(employees) {
+  const generateRandomIdx = currentEmployees => Math.floor(Math.random() * currentEmployees.length);
+  const generatePerson = currEmployees => {
+    const randomIdx = generateRandomIdx(currEmployees);
+    const employee = currEmployees[randomIdx];
+    currEmployees.splice(randomIdx);
+    return employee;
+  };
 
-### `npm test`
+  const employeesCopy = [...employees]; 
+  const randomizedEmployees = [];
+  while (employeesCopy.length > 0) {
+    randomizedEmployees.push(generatePerson(employeesCopy));
+  }
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  const randomizedPairs = [];
+  for (let i = 0; i < randomizedEmployees.length; i += 1) {
+    const giverIdx = i;
+    let receiverIdx;
 
-### `npm run build`
+    if (i === randomizedEmployees.length - 1) {
+      receiverIdx = 0;
+    } else {
+      receiverIdx = i + 1;      
+    }
+    
+    const pair = {giver: randomizedEmployees[giverIdx], receiver: randomizedEmployees[receiverIdx]};
+    randomizedPairs.push(pair);
+  }
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  return randomizedPairs;
+}
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+2. Using an array to keep track of already used indicies with the utilization of truthy & falsy as a flag - current implementation. The reason I chose this implementation over the one above, is because the above algorithm relies on deleting elements from the `employeesCopy` array in order to generate new, never-before-used indicies, which requires that the `employeesCopy` is re-indexed every time the deletion occurs, which is an expensive operation. The exact time complexity is difficult to estimate, because it depends on where the deletion is happening in the array (which in turn determines the number of loops required in order to shift all the indicies in the array), however in the worst case where all indicies happen to be in order (0, 1, 2, 3...) the time complexity is O(n^2), because (n-1) + (n-2) + (n-3) + ... + 2 + 1 is O(n^2). Whereas, my current implementation doesn't require any systematic looping, with the only potential looping happening if the generated random index has already been created previously (which is a low probability event, given that Math.random() is implemented to return values with uniform distribution). 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

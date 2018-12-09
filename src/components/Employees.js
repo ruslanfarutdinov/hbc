@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Employee from './Employee';
 
 const MobileDiv = styled.div`
@@ -27,123 +28,12 @@ const DesktopInnerDiv = styled.div`
   flex-wrap: wrap;
 `;
 
-const mockData = [
-  {
-    person1: {
-      first: 'Brennan',
-      last: 'Jackson',
-      department: 'Engineering',
-      location: 'New York',
-      motto: 'Distributed discrete superstructure',
-      guid: 'd20c20ab-5813-48d4-8148-dee37530a1ec',
-    }, 
-    person2: {
-      first: 'Michael',
-      last: 'Nieson',
-      department: 'Human Resources',
-      location: 'Dublin',
-      motto: 'Self-enabling fault-tolerant product',
-      guid: '1886e6fb-bac5-44dd-be1a-748a246f9c91',
-    },
-  }, 
-  {
-    person1: {
-      first: 'Brennan',
-      last: 'Jackson',
-      department: 'Engineering',
-      location: 'New York',
-      motto: 'Distributed discrete superstructure',
-      guid: 'd20c20ab-5813-48d4-8148-dee37530a1ec',
-    }, 
-    person2: {
-      first: 'Michael',
-      last: 'Nieson',
-      department: 'Human Resources',
-      location: 'Dublin',
-      motto: 'Self-enabling fault-tolerant product',
-      guid: '1886e6fb-bac5-44dd-be1a-748a246f9c91',
-    },
-  }, 
-  {
-    person1: {
-      first: 'Brennan',
-      last: 'Jackson',
-      department: 'Engineering',
-      location: 'New York',
-      motto: 'Distributed discrete superstructure',
-      guid: 'd20c20ab-5813-48d4-8148-dee37530a1ec',
-    }, 
-    person2: {
-      first: 'Michael',
-      last: 'Nieson',
-      department: 'Human Resources',
-      location: 'Dublin',
-      motto: 'Self-enabling fault-tolerant product',
-      guid: '1886e6fb-bac5-44dd-be1a-748a246f9c91',
-    },
-  },
-  {
-    person1: {
-      first: 'Brennan',
-      last: 'Jackson',
-      department: 'Engineering',
-      location: 'New York',
-      motto: 'Distributed discrete superstructure',
-      guid: 'd20c20ab-5813-48d4-8148-dee37530a1ec',
-    }, 
-    person2: {
-      first: 'Michael',
-      last: 'Nieson',
-      department: 'Human Resources',
-      location: 'Dublin',
-      motto: 'Self-enabling fault-tolerant product',
-      guid: '1886e6fb-bac5-44dd-be1a-748a246f9c91',
-    },
-  }, 
-  {
-    person1: {
-      first: 'Brennan',
-      last: 'Jackson',
-      department: 'Engineering',
-      location: 'New York',
-      motto: 'Distributed discrete superstructure',
-      guid: 'd20c20ab-5813-48d4-8148-dee37530a1ec',
-    }, 
-    person2: {
-      first: 'Michael',
-      last: 'Nieson',
-      department: 'Human Resources',
-      location: 'Dublin',
-      motto: 'Self-enabling fault-tolerant product',
-      guid: '1886e6fb-bac5-44dd-be1a-748a246f9c91',
-    },
-  },
-  {
-    person1: {
-      first: 'Brennan',
-      last: 'Jackson',
-      department: 'Engineering',
-      location: 'New York',
-      motto: 'Distributed discrete superstructure',
-      guid: 'd20c20ab-5813-48d4-8148-dee37530a1ec',
-    }, 
-    person2: {
-      first: 'Michael',
-      last: 'Nieson',
-      department: 'Human Resources',
-      location: 'Dublin',
-      motto: 'Self-enabling fault-tolerant product',
-      guid: '1886e6fb-bac5-44dd-be1a-748a246f9c91',
-    },
-  }
-]
-
-const employees = ({isMobile}) => {
+const employees = ({isMobile, randomizedPairs}) => {
   if (isMobile) {
     return (
       <MobileDiv>
-        {mockData.map((pair, i) => <Employee 
-          person1={pair.person1} person2={pair.person2} count={i+1} key={pair.person1.guid}
+        {randomizedPairs.map((pair, i) => <Employee 
+          giver={pair.giver} receiver={pair.receiver} count={i+1} key={pair.giver.guid}
           isMobile={isMobile}/>)}
       </MobileDiv>
     );
@@ -151,8 +41,8 @@ const employees = ({isMobile}) => {
     return (
       <DesktopDiv>
         <DesktopInnerDiv>
-          {mockData.map((pair, i) => <Employee 
-            person1={pair.person1} person2={pair.person2} count={i+1} key={pair.person1.guid}/>)}
+          {randomizedPairs.map((pair, i) => <Employee 
+            giver={pair.giver} receiver={pair.receiver} count={i+1} key={pair.giver.guid}/>)}
         </DesktopInnerDiv>
       </DesktopDiv>
     );

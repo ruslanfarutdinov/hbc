@@ -19,17 +19,16 @@ const DesktopDiv = styled.div`
   width: 290px;
 `;
 
-const employee = ({person1, person2, count, isMobile}) => {
+const employee = ({giver, receiver, count, isMobile}) => {
   if (isMobile) {
     return (
       <MobileDiv>
         <p>Pair {count}</p>
         <p>
-          {person1.first} {person1.last} from {person1.location} {person1.department} & {person2.first} {person2.last} from {person2.location} {person2.department}.
+          {giver.name.first} {giver.name.last} from {giver.location} {giver.department} & {receiver.name.first} {receiver.name.last} from {receiver.location} {receiver.department}.
         </p>
         <p>
-          {person1.first}'s motto in life is "{person1.motto}", whereas {person2.first}'s is 
-          "{person2.motto}."
+          {giver.name.first}'s motto in life is "{giver.motto}", whereas {receiver.name.first}'s is "{receiver.motto}."
         </p>
       </MobileDiv>
     );
@@ -38,11 +37,11 @@ const employee = ({person1, person2, count, isMobile}) => {
       <DesktopDiv>
         <p>Pair {count}</p>
         <p>
-          {person1.first} {person1.last} from {person1.location} {person1.department} & {person2.first} {person2.last} from {person2.location} {person2.department}.
+          {giver.name.first} {giver.name.last} from {giver.location} {giver.department} & {receiver.name.first} {receiver.name.last} from {receiver.location} {receiver.department}.
         </p>
         <p>
-          {person1.first}'s motto in life is "{person1.motto}", whereas {person2.first}'s is 
-          "{person2.motto}."
+          {giver.name.first}'s motto in life is "{giver.motto}", whereas {receiver.name.first}'s is 
+          "{receiver.motto}."
         </p>
       </DesktopDiv>
     );

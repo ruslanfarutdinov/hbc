@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Button from './Button';
 
 const MobileDiv = styled.div`
@@ -26,17 +27,17 @@ const DesktopDiv = styled.div`
   display: flex;
 `;
 
-const toolbar = ({isMobile}) => {
+const toolbar = ({isMobile, handleGenerateNewPair}) => {
   if (isMobile) {
     return (
       <MobileDiv>
-        <Button/>
+        <Button handleGenerateNewPair={handleGenerateNewPair}/>
       </MobileDiv>
     );
   } else {
     return (
       <DesktopDiv>
-        <Button/>
+        <Button handleGenerateNewPair={handleGenerateNewPair}/>
       </DesktopDiv>
     );
   }
