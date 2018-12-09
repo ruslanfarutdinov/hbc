@@ -37,34 +37,45 @@ const Heading = styled.h2`
 const employees = ({isMobile, nyRandomized, dublinRandomized}) => {
   const nyPairs = nyRandomized.map((pair, i) => <Employee 
     giver={pair.giver} receiver={pair.receiver} key={pair.giver.guid} isMobile={isMobile}/>);
-
   const dublinPairs = dublinRandomized.map((pair, i) => <Employee 
     giver={pair.giver} receiver={pair.receiver} key={pair.giver.guid} isMobile={isMobile}/>);
 
-  const nyHeading = nyPairs.length > 0 ? <Heading>New York</Heading> : null;
-  const dublinHeading = dublinPairs.length > 0 ? <Heading>Dublin</Heading> : null;
+
+  const generateDisplay = (isMobile, pairs, text) => {
+    const display = [];
+
+    if (pairs.length > 0) {
+      const heading = <Heading>{text}</Heading>;
+      if (isMobile) {
+        display.push(heading, pairs);
+        return display;
+      }
+
+      const cards = (
+        <DesktopInnerDiv>
+          {pairs}
+        </DesktopInnerDiv>
+      );
+      display.push(heading, cards);
+    }
+
+    return display;
+  }
+
 
   if (isMobile) {
     return (
       <MobileDiv>
-        {nyHeading}
-        {nyPairs}
-        {dublinHeading}
-        {dublinPairs}
+        {generateDisplay(isMobile, nyPairs, 'New York')}
+        {generateDisplay(isMobile, dublinPairs, 'Dublin')}
       </MobileDiv>
     );
   }  
 
   return (
     <DesktopDiv>
-      {nyHeading}
-      <DesktopInnerDiv>
-        {nyPairs}
-      </DesktopInnerDiv>
-      {dublinHeading}
-      <DesktopInnerDiv>
-        {dublinPairs}
-      </DesktopInnerDiv>
+      {generateDisplay(isMobile, nyPairs, 'New York')}
+      {generateDisplay(isMobile, dublinPairs, 'Dublin')}
     </DesktopDiv>
   );
 };
