@@ -1,6 +1,6 @@
 Hello HBC team!
 
-Thank you for giving me the opportunity to showcase my skills via this coding challenge.
+Thank you for giving me the opportunity to showcase my skills via this coding challenge!
 
 I created the project with [Create React App](https://github.com/facebook/create-react-app) for quick setup. 
 In the past I developed projects from scratch where I setup React with Webpack and Babel. 
