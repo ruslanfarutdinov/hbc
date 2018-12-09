@@ -29,20 +29,21 @@ const DesktopInnerDiv = styled.div`
 `;
 
 const employees = ({isMobile, randomizedPairs}) => {
+  const pairs = randomizedPairs.map((pair, i) => <Employee 
+    giver={pair.giver} receiver={pair.receiver} count={i+1} key={pair.giver.guid} 
+    isMobile={isMobile}/>);
+
   if (isMobile) {
     return (
       <MobileDiv>
-        {randomizedPairs.map((pair, i) => <Employee 
-          giver={pair.giver} receiver={pair.receiver} count={i+1} key={pair.giver.guid}
-          isMobile={isMobile}/>)}
+        {pairs}
       </MobileDiv>
     );
   } else {
     return (
       <DesktopDiv>
         <DesktopInnerDiv>
-          {randomizedPairs.map((pair, i) => <Employee 
-            giver={pair.giver} receiver={pair.receiver} count={i+1} key={pair.giver.guid}/>)}
+          {pairs}
         </DesktopInnerDiv>
       </DesktopDiv>
     );
