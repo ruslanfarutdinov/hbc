@@ -14,9 +14,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const msg = 'GENERATE NEW PAIRS';
-
-const button = ({handleGenerateNewPair}) => (
+const button = ({handleGenerateNewPair, msg}) => (
   <Div>
     <Button onClick={handleGenerateNewPair}>{msg}</Button>
   </Div>

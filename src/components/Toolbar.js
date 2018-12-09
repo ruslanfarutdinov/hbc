@@ -21,23 +21,36 @@ const DesktopDiv = styled.div`
   color: white;
   margin: 10px auto;
   width: 60%;
-  min-width: 325px;
+  min-width: 375px;
   max-width: 830px;
   height: 40px;
   display: flex;
 `;
 
+const ButtonDiv = styled.div`
+  width: 100%;
+  display: flex;  
+`;
+
 const toolbar = ({isMobile, handleGenerateNewPair}) => {
+  const buttons = (
+    <ButtonDiv>
+      <Button handleGenerateNewPair={handleGenerateNewPair} msg="SHOW NY PAIRS"/>
+      <Button handleGenerateNewPair={handleGenerateNewPair} msg="GENERATE NEW PAIRS"/>
+      <Button handleGenerateNewPair={handleGenerateNewPair} msg="SHOW DUBLIN PAIRS"/>
+    </ButtonDiv>
+  );
+
   if (isMobile) {
     return (
       <MobileDiv>
-        <Button handleGenerateNewPair={handleGenerateNewPair}/>
+        {buttons}
       </MobileDiv>
     );
   } else {
     return (
       <DesktopDiv>
-        <Button handleGenerateNewPair={handleGenerateNewPair}/>
+        {buttons}
       </DesktopDiv>
     );
   }

@@ -12,7 +12,7 @@ const MobileDiv = styled.div`
 const DesktopDiv = styled.div`
   margin: 10px auto;
   width: 60%;
-  min-width: 325px;
+  min-width: 375px;
   max-width: 830px;
   border: 2px solid #858585;
   border-radius: 4px;

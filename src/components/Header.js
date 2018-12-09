@@ -20,7 +20,7 @@ const DesktopDiv = styled.div`
   font-size: 20px;
   margin: auto;
   width: 60%;
-  min-width: 325px;
+  min-width: 375px;
   max-width: 830px;
   height: 40px;
 `;
