@@ -5,7 +5,7 @@ Thank you for giving me the opportunity to showcase my skills via this coding ch
 I created the project with [Create React App](https://github.com/facebook/create-react-app) for quick setup. 
 In the past I developed projects from scratch where I setup React with Webpack and Babel. 
 
-To start a development server and load the page run:
+To start a development server and load the page, run:
 ### `npm start`
 
 To see how the page looks on mobile, reload while simulating the mobile screen size (Chrome Dev Tools - Toggle device Toolbar).

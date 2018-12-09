@@ -15,7 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employees: [],
+      ny: [],
+      dublin: [],
       randomizedPairs: [],
     };
     
@@ -23,13 +24,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://hbc-frontend-challenge.hbccommon.private.hbc.com/coffee-week/users')
+    let ny, nyRandomized, dublin, dublinRandomized;
+
+    axios.get('https://hbc-frontend-challenge.hbccommon.private.hbc.com/coffee-week/users?location=ny')
       .then(response => {
-        const employees = response.data.users;
-        const randomizedPairs = this.createRandomPairs(employees);
-        this.setState({employees, randomizedPairs});
+        ny = response.data.users;
+        nyRandomized = this.createRandomPairs(ny);
+        return axios.get('https://hbc-frontend-challenge.hbccommon.private.hbc.com/coffee-week/users?location=dub')
       })
-      .catch(error => console.log(error));
+      .then(res => {
+        dublin = res.data.users;
+        dublinRandomized = this.createRandomPairs(dublin);
+        const randomizedPairs = [...nyRandomized, ...dublinRandomized];
+        this.setState({ny, dublin, randomizedPairs});
+      })
+      .catch(error => console.log(`Get request error: ${error}`));
   }
 
   createRandomPairs(employees) {
@@ -46,7 +55,6 @@ class App extends Component {
       randomIdx.push(idx);
     }
 
-    console.log(randomIdx);
     const randomizedPairs = [];
     for (let i = 0; i < randomIdx.length; i += 1) {
       const giverIdx = randomIdx[i];
@@ -66,7 +74,9 @@ class App extends Component {
   }
 
   handleGenerateNewPair() {
-    const newRandomizedPairs = this.createRandomPairs(this.state.employees);
+    const newNYRandomized = this.createRandomPairs(this.state.ny);
+    const newDublinRandomized = this.createRandomPairs(this.state.dublin);
+    const newRandomizedPairs = [...newNYRandomized, ...newDublinRandomized];
     this.setState({randomizedPairs: newRandomizedPairs});
   }
 

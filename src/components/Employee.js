@@ -19,30 +19,30 @@ const DesktopDiv = styled.div`
   width: 290px;
 `;
 
+
 const employee = ({giver, receiver, count, isMobile}) => {
+  const text = (
+    <div>
+      <p>Pair {count}</p>
+      <p>
+        {giver.name.first} {giver.name.last} from {giver.location} {giver.department} gifts coffee to {receiver.name.first} {receiver.name.last} from {receiver.location} {receiver.department}.
+      </p>
+      <p>
+        {giver.name.first}'s motto in life is "{giver.motto}", whereas {receiver.name.first}'s is "{receiver.motto}."
+      </p>
+    </div>
+  );
+  
   if (isMobile) {
     return (
       <MobileDiv>
-        <p>Pair {count}</p>
-        <p>
-          {giver.name.first} {giver.name.last} from {giver.location} {giver.department} & {receiver.name.first} {receiver.name.last} from {receiver.location} {receiver.department}.
-        </p>
-        <p>
-          {giver.name.first}'s motto in life is "{giver.motto}", whereas {receiver.name.first}'s is "{receiver.motto}."
-        </p>
+        {text}
       </MobileDiv>
     );
   } else {
     return (
       <DesktopDiv>
-        <p>Pair {count}</p>
-        <p>
-          {giver.name.first} {giver.name.last} from {giver.location} {giver.department} & {receiver.name.first} {receiver.name.last} from {receiver.location} {receiver.department}.
-        </p>
-        <p>
-          {giver.name.first}'s motto in life is "{giver.motto}", whereas {receiver.name.first}'s is 
-          "{receiver.motto}."
-        </p>
+        {text}
       </DesktopDiv>
     );
   }
