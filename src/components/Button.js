@@ -14,10 +14,22 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const button = ({handleGenerateNewPair, msg}) => (
-  <Div>
-    <Button onClick={handleGenerateNewPair}>{msg}</Button>
-  </Div>
-);
+const button = ({id, handleShowNYPairs, handleGenerateNewPair, handleShowDublinPairs, msg}) => {
+  let clickHandler;
+  if (id === 1) {
+    clickHandler = handleShowNYPairs;
+  } else if (id === 2) {
+    clickHandler = handleGenerateNewPair;
+  } else if (id === 3) {
+    clickHandler = handleShowDublinPairs;
+  }
+  
+  return (
+    <Div>
+      <Button onClick={clickHandler}>{msg}</Button>
+    </Div>
+  );
+}
+
 
 export default button;

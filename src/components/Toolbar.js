@@ -32,12 +32,12 @@ const ButtonDiv = styled.div`
   display: flex;  
 `;
 
-const toolbar = ({isMobile, handleGenerateNewPair}) => {
+const toolbar = ({isMobile, handleGenerateNewPair, handleShowNYPairs, handleShowDublinPairs}) => {
   const buttons = (
     <ButtonDiv>
-      <Button handleGenerateNewPair={handleGenerateNewPair} msg="SHOW NY PAIRS"/>
-      <Button handleGenerateNewPair={handleGenerateNewPair} msg="GENERATE NEW PAIRS"/>
-      <Button handleGenerateNewPair={handleGenerateNewPair} msg="SHOW DUBLIN PAIRS"/>
+      <Button id={1} handleShowNYPairs={handleShowNYPairs} msg="SHOW NY PAIRS"/>
+      <Button id={2} handleGenerateNewPair={handleGenerateNewPair} msg="GENERATE NEW PAIRS"/>
+      <Button id={3} handleShowDublinPairs={handleShowDublinPairs} msg="SHOW DUBLIN PAIRS"/>
     </ButtonDiv>
   );
 

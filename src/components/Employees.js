@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Employee from './Employee';
 
 const MobileDiv = styled.div`
-  margin: 50px auto 50px auto;
+  margin: 30px auto 50px auto;
   display: flex;
   flex-direction: column;
 `;
@@ -18,36 +18,55 @@ const DesktopDiv = styled.div`
   border-radius: 4px;
   color: black;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const DesktopInnerDiv = styled.div`
-  margin: 70px auto 70px auto;
+  margin: 10px auto 50px auto;
   display: flex;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
 `;
 
-const employees = ({isMobile, randomizedPairs}) => {
-  const pairs = randomizedPairs.map((pair, i) => <Employee 
-    giver={pair.giver} receiver={pair.receiver} count={i+1} key={pair.giver.guid} 
-    isMobile={isMobile}/>);
+const Heading = styled.h2`
+  margin: 10px auto;
+`;
+
+const employees = ({isMobile, nyRandomized, dublinRandomized}) => {
+  const nyPairs = nyRandomized.map((pair, i) => <Employee 
+    giver={pair.giver} receiver={pair.receiver} key={pair.giver.guid} isMobile={isMobile}/>);
+
+  const dublinPairs = dublinRandomized.map((pair, i) => <Employee 
+    giver={pair.giver} receiver={pair.receiver} key={pair.giver.guid} isMobile={isMobile}/>);
+
+  const nyHeading = nyPairs.length > 0 ? <Heading>New York</Heading> : null;
+  const dublinHeading = dublinPairs.length > 0 ? <Heading>Dublin</Heading> : null;
 
   if (isMobile) {
     return (
       <MobileDiv>
-        {pairs}
+        {nyHeading}
+        {nyPairs}
+        {dublinHeading}
+        {dublinPairs}
       </MobileDiv>
     );
-  } else {
-    return (
-      <DesktopDiv>
-        <DesktopInnerDiv>
-          {pairs}
-        </DesktopInnerDiv>
-      </DesktopDiv>
-    );
-  }
+  }  
+
+  return (
+    <DesktopDiv>
+      {nyHeading}
+      <DesktopInnerDiv>
+        {nyPairs}
+      </DesktopInnerDiv>
+      {dublinHeading}
+      <DesktopInnerDiv>
+        {dublinPairs}
+      </DesktopInnerDiv>
+    </DesktopDiv>
+  );
 };
 
 export default employees;

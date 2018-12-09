@@ -17,10 +17,17 @@ class App extends Component {
     this.state = {
       ny: [],
       dublin: [],
-      randomizedPairs: [],
+      nyRandomized: [],
+      dublinRandomized: [],
+      cache: {
+        ny: [],
+        dublin: [],
+      }
     };
     
     this.handleGenerateNewPair = this.handleGenerateNewPair.bind(this);
+    this.handleShowNYPairs = this.handleShowNYPairs.bind(this);
+    this.handleShowDublinPairs = this.handleShowDublinPairs.bind(this);
   }
 
   componentDidMount() {
@@ -35,10 +42,13 @@ class App extends Component {
       .then(res => {
         dublin = res.data.users;
         dublinRandomized = this.createRandomPairs(dublin);
-        const randomizedPairs = [...nyRandomized, ...dublinRandomized];
-        this.setState({ny, dublin, randomizedPairs});
+        const cache = {
+          ny: nyRandomized,
+          dublin: dublinRandomized,
+        }
+        this.setState({ny, dublin, nyRandomized, dublinRandomized, cache});
       })
-      .catch(error => console.log(`Get request error: ${error}`));
+      .catch(error => console.log(`Get request error. ${error}`));
   }
 
   createRandomPairs(employees) {
@@ -76,8 +86,29 @@ class App extends Component {
   handleGenerateNewPair() {
     const newNYRandomized = this.createRandomPairs(this.state.ny);
     const newDublinRandomized = this.createRandomPairs(this.state.dublin);
-    const newRandomizedPairs = [...newNYRandomized, ...newDublinRandomized];
-    this.setState({randomizedPairs: newRandomizedPairs});
+    const newCache = {
+      ny: newNYRandomized,
+      dublin: newDublinRandomized,
+    }
+    this.setState({
+      nyRandomized: newNYRandomized,
+      dublinRandomized: newDublinRandomized,
+      cache: newCache,
+    });
+  }
+
+  handleShowNYPairs() {
+    this.setState({
+      dublinRandomized: [],
+      nyRandomized: this.state.cache.ny,
+    });
+  }
+
+  handleShowDublinPairs() {
+    this.setState({
+      nyRandomized: [],
+      dublinRandomized: this.state.cache.dublin,
+    });
   }
 
   render() {
@@ -86,8 +117,10 @@ class App extends Component {
     return (
       <MainContainer>
         <Header isMobile={isMobile}/>
-        <Toolbar isMobile={isMobile} handleGenerateNewPair={this.handleGenerateNewPair}/>
-        <Employees isMobile={isMobile} randomizedPairs={this.state.randomizedPairs}/>
+        <Toolbar isMobile={isMobile} handleGenerateNewPair={this.handleGenerateNewPair}
+          handleShowNYPairs={this.handleShowNYPairs} handleShowDublinPairs={this.handleShowDublinPairs}/>
+        <Employees isMobile={isMobile} nyRandomized={this.state.nyRandomized}
+          dublinRandomized={this.state.dublinRandomized}/>
       </MainContainer>
     );
   }

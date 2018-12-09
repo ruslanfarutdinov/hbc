@@ -23,16 +23,18 @@ const DesktopDiv = styled.div`
 const employee = ({giver, receiver, count, isMobile}) => {
   const text = (
     <div>
-      <p>Pair {count}</p>
       <p>
         {giver.name.first} {giver.name.last} from {giver.location} {giver.department} gifts coffee to {receiver.name.first} {receiver.name.last} from {receiver.location} {receiver.department}.
       </p>
       <p>
-        {giver.name.first}'s motto in life is "{giver.motto}", whereas {receiver.name.first}'s is "{receiver.motto}."
+        {receiver.name.first}'s motto in life is "{receiver.motto}."
       </p>
+      <p>
+        Email: {receiver.email} / Phone: {receiver.phone}.
+      </p> 
     </div>
   );
-  
+
   if (isMobile) {
     return (
       <MobileDiv>
